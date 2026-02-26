@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polyfill Array.includes</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Prueba tu Polyfill para <code>Array.prototype.includes</code></h1>
+  <button id="test-btn">Probar includes</button>
+  <div id="result">Haz clic en el botón para ver el resultado.</div>
+
+  <script>
+    // Aquí va tu polyfill
+    if (!Array.prototype.incluye) {
+  Array.prototype.incluye = function(searchElement, fromIndex) {
+    if (this == null) {
+      throw new TypeError('Array.prototype.includes called on null or undefined');
+    }
+    const o = Object(this);
+    const len = o.length >>> 0;
+    if (len === 0) {
+      return false;
+    }
+    const n = fromIndex | 0;
+    let k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+    while (k < len) {
+      if (o[k] === searchElement || (typeof o[k] === 'number' && typeof searchElement === 'number' && isNaN(o[k]) && isNaN(searchElement))) {
+        return true;
+      }
+      k++;
+    }
+    return false;
+  };
+}
+
+
+    // Código para probar el polyfill
+    document.getElementById('test-btn').addEventListener('click', () => {
+      const arr = [1, 2, 3, NaN];
+      const tests = [2, 4, NaN];
+      const results = tests.map(item => `includes(${item}): ${arr.incluye(item)}`);
+      document.getElementById('result').textContent = results.join(' | ');
+    });
+  </script>
+</body>
+</html>
