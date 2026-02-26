@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Saludo />
-      <h1>Mi Aplicación con 2 Contadores</h1>
+      <h1>Mi Aplicación con 2 Contadores live</h1>
       <ContadorContenedor />
       <hr/>
       <ContadorContenedor2 />

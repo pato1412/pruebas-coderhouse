@@ -35,7 +35,7 @@ export function ContadorContenedor2() {
 export function Saludo() {
   return (
     <div>
-      <Welcome name="Pablo" age={30} />
+      <Welcome name="Pablo david" age={30} />
     </div>
   );
 }
